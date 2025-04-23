@@ -10,3 +10,9 @@ server:
 
 client:
   python3 client.py
+
+instalar_bibliotecas:
+  pip install -r requirements.txt
+
+atualizar_bibliotecas:
+  pip freeze > requirements.txt
