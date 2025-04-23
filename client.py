@@ -1,12 +1,12 @@
-from comunicacao_grpc import com_pb2_grpc, com_pb2
+from comunicacao_grpc import mensagens_pb2, mensagens_pb2_grpc
 import grpc
 
 def client():
     print("Começando Cliente....")
     channel = grpc.insecure_channel('localhost:50051')
-    stub = com_pb2_grpc.MensagemStub(channel)
+    stub = mensagens_pb2_grpc.MensagemStub(channel)
     nome = "Andre"
-    pessoa = com_pb2.Pessoa(nome=nome)
+    pessoa = mensagens_pb2.Pessoa(nome=nome)
     feature = stub.RecebePessoa(pessoa)
     print(feature)
 

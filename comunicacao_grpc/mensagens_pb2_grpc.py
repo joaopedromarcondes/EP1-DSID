@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from comunicacao_grpc import com_pb2 as comunicacao__grpc_dot_com__pb2
+from comunicacao_grpc import mensagens_pb2 as comunicacao__grpc_dot_mensagens__pb2
 
 GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in comunicacao_grpc/com_pb2_grpc.py depends on'
+        + f' but the generated code in comunicacao_grpc/mensagens_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,8 +36,8 @@ class MensagemStub(object):
         """
         self.RecebePessoa = channel.unary_unary(
                 '/Mensagem/RecebePessoa',
-                request_serializer=comunicacao__grpc_dot_com__pb2.Pessoa.SerializeToString,
-                response_deserializer=comunicacao__grpc_dot_com__pb2.Pessoa.FromString,
+                request_serializer=comunicacao__grpc_dot_mensagens__pb2.Pessoa.SerializeToString,
+                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.Pessoa.FromString,
                 _registered_method=True)
 
 
@@ -55,8 +55,8 @@ def add_MensagemServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RecebePessoa': grpc.unary_unary_rpc_method_handler(
                     servicer.RecebePessoa,
-                    request_deserializer=comunicacao__grpc_dot_com__pb2.Pessoa.FromString,
-                    response_serializer=comunicacao__grpc_dot_com__pb2.Pessoa.SerializeToString,
+                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.Pessoa.FromString,
+                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.Pessoa.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -84,8 +84,8 @@ class Mensagem(object):
             request,
             target,
             '/Mensagem/RecebePessoa',
-            comunicacao__grpc_dot_com__pb2.Pessoa.SerializeToString,
-            comunicacao__grpc_dot_com__pb2.Pessoa.FromString,
+            comunicacao__grpc_dot_mensagens__pb2.Pessoa.SerializeToString,
+            comunicacao__grpc_dot_mensagens__pb2.Pessoa.FromString,
             options,
             channel_credentials,
             insecure,
