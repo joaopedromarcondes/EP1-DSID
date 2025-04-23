@@ -1,10 +1,22 @@
 syntax = "proto3";
 
 service Mensagem {
-    rpc RecebePessoa(Pessoa) returns (Pessoa) {}
+    rpc RecebePessoa(MensagemPessoa) returns (MensagemPessoa) {}
+    rpc FuncaoVoid(MensagemVoid) returns (MensagemVoid) {}
+    rpc FuncaoLong(MensagemLong) returns (MensagemLong) {}
+    //rpc FuncaoString() returns (google.protobuf.StringValue) {}
+    
 }
 
 
-message Pessoa {
+message MensagemPessoa {
     string nome = 1;
+}
+
+message MensagemVoid{
+
+}
+
+message MensagemLong{
+    int64 valor = 1;
 }
