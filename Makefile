@@ -4,3 +4,9 @@ build:
   --python_out=. \
   --grpc_python_out=. \
   comunicacao_grpc/com.proto
+
+server:
+  python3 server.py
+
+client:
+  python3 client.py
