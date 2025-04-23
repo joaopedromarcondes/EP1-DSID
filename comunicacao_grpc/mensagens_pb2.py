@@ -22,21 +22,26 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n comunicacao_grpc/mensagens.proto\"\x1e\n\x0eMensagemPessoa\x12\x0c\n\x04nome\x18\x01 \x01(\t\"\x0e\n\x0cMensagemVoid\"\x1d\n\x0cMensagemLong\x12\r\n\x05valor\x18\x01 \x01(\x03\x32\x9a\x01\n\x08Mensagem\x12\x32\n\x0cRecebePessoa\x12\x0f.MensagemPessoa\x1a\x0f.MensagemPessoa\"\x00\x12,\n\nFuncaoVoid\x12\r.MensagemVoid\x1a\r.MensagemVoid\"\x00\x12,\n\nFuncaoLong\x12\r.MensagemLong\x1a\r.MensagemLong\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n comunicacao_grpc/mensagens.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x0e\n\x0cMensagemVoid\"\x1d\n\x0cMensagemLong\x12\r\n\x05valor\x18\x01 \x01(\x03\"%\n\x12MensagemVariosLong\x12\x0f\n\x07valores\x18\x01 \x03(\x03\"\x1f\n\x0eMensagemString\x12\r\n\x05valor\x18\x01 \x01(\t\"\x8f\x01\n\x10MensagemComplexa\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04nome\x18\x02 \x01(\t\x12\r\n\x05\x61tivo\x18\x03 \x01(\x08\x12\x0f\n\x07salario\x18\x04 \x01(\x01\x12\x13\n\x0b\x65stadoCivil\x18\x05 \x01(\t\x12\x0e\n\x06\x66ilhos\x18\x06 \x03(\t\x12\r\n\x05\x63\x61rgo\x18\x07 \x01(\t\x12\r\n\x05idade\x18\x08 \x01(\x05\x32\xa4\x02\n\x08Mensagem\x12<\n\nFuncaoVoid\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12,\n\nFuncaoLong\x12\r.MensagemLong\x1a\r.MensagemLong\"\x00\x12>\n\x10\x46uncaoVariosLong\x12\x13.MensagemVariosLong\x1a\x13.MensagemVariosLong\"\x00\x12\x32\n\x0c\x46uncaoString\x12\x0f.MensagemString\x1a\x0f.MensagemString\"\x00\x12\x38\n\x0e\x46uncaoComplexa\x12\x11.MensagemComplexa\x1a\x11.MensagemComplexa\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'comunicacao_grpc.mensagens_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_MENSAGEMPESSOA']._serialized_start=36
-  _globals['_MENSAGEMPESSOA']._serialized_end=66
-  _globals['_MENSAGEMVOID']._serialized_start=68
-  _globals['_MENSAGEMVOID']._serialized_end=82
-  _globals['_MENSAGEMLONG']._serialized_start=84
-  _globals['_MENSAGEMLONG']._serialized_end=113
-  _globals['_MENSAGEM']._serialized_start=116
-  _globals['_MENSAGEM']._serialized_end=270
+  _globals['_MENSAGEMVOID']._serialized_start=65
+  _globals['_MENSAGEMVOID']._serialized_end=79
+  _globals['_MENSAGEMLONG']._serialized_start=81
+  _globals['_MENSAGEMLONG']._serialized_end=110
+  _globals['_MENSAGEMVARIOSLONG']._serialized_start=112
+  _globals['_MENSAGEMVARIOSLONG']._serialized_end=149
+  _globals['_MENSAGEMSTRING']._serialized_start=151
+  _globals['_MENSAGEMSTRING']._serialized_end=182
+  _globals['_MENSAGEMCOMPLEXA']._serialized_start=185
+  _globals['_MENSAGEMCOMPLEXA']._serialized_end=328
+  _globals['_MENSAGEM']._serialized_start=331
+  _globals['_MENSAGEM']._serialized_end=623
 # @@protoc_insertion_point(module_scope)

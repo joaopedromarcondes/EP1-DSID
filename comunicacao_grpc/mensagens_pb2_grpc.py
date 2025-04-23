@@ -4,6 +4,7 @@ import grpc
 import warnings
 
 from comunicacao_grpc import mensagens_pb2 as comunicacao__grpc_dot_mensagens__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
@@ -34,31 +35,35 @@ class MensagemStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.RecebePessoa = channel.unary_unary(
-                '/Mensagem/RecebePessoa',
-                request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.SerializeToString,
-                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.FromString,
-                _registered_method=True)
         self.FuncaoVoid = channel.unary_unary(
                 '/Mensagem/FuncaoVoid',
-                request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.SerializeToString,
-                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.FromString,
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.FuncaoLong = channel.unary_unary(
                 '/Mensagem/FuncaoLong',
                 request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemLong.SerializeToString,
                 response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemLong.FromString,
                 _registered_method=True)
+        self.FuncaoVariosLong = channel.unary_unary(
+                '/Mensagem/FuncaoVariosLong',
+                request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.SerializeToString,
+                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.FromString,
+                _registered_method=True)
+        self.FuncaoString = channel.unary_unary(
+                '/Mensagem/FuncaoString',
+                request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemString.SerializeToString,
+                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemString.FromString,
+                _registered_method=True)
+        self.FuncaoComplexa = channel.unary_unary(
+                '/Mensagem/FuncaoComplexa',
+                request_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.SerializeToString,
+                response_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.FromString,
+                _registered_method=True)
 
 
 class MensagemServicer(object):
     """Missing associated documentation comment in .proto file."""
-
-    def RecebePessoa(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def FuncaoVoid(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -72,23 +77,51 @@ class MensagemServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def FuncaoVariosLong(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FuncaoString(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FuncaoComplexa(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MensagemServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'RecebePessoa': grpc.unary_unary_rpc_method_handler(
-                    servicer.RecebePessoa,
-                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.FromString,
-                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.SerializeToString,
-            ),
             'FuncaoVoid': grpc.unary_unary_rpc_method_handler(
                     servicer.FuncaoVoid,
-                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.FromString,
-                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.SerializeToString,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'FuncaoLong': grpc.unary_unary_rpc_method_handler(
                     servicer.FuncaoLong,
                     request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemLong.FromString,
                     response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemLong.SerializeToString,
+            ),
+            'FuncaoVariosLong': grpc.unary_unary_rpc_method_handler(
+                    servicer.FuncaoVariosLong,
+                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.FromString,
+                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.SerializeToString,
+            ),
+            'FuncaoString': grpc.unary_unary_rpc_method_handler(
+                    servicer.FuncaoString,
+                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemString.FromString,
+                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemString.SerializeToString,
+            ),
+            'FuncaoComplexa': grpc.unary_unary_rpc_method_handler(
+                    servicer.FuncaoComplexa,
+                    request_deserializer=comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.FromString,
+                    response_serializer=comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -100,33 +133,6 @@ def add_MensagemServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Mensagem(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def RecebePessoa(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/Mensagem/RecebePessoa',
-            comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.SerializeToString,
-            comunicacao__grpc_dot_mensagens__pb2.MensagemPessoa.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def FuncaoVoid(request,
@@ -143,8 +149,8 @@ class Mensagem(object):
             request,
             target,
             '/Mensagem/FuncaoVoid',
-            comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.SerializeToString,
-            comunicacao__grpc_dot_mensagens__pb2.MensagemVoid.FromString,
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,
@@ -172,6 +178,87 @@ class Mensagem(object):
             '/Mensagem/FuncaoLong',
             comunicacao__grpc_dot_mensagens__pb2.MensagemLong.SerializeToString,
             comunicacao__grpc_dot_mensagens__pb2.MensagemLong.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def FuncaoVariosLong(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Mensagem/FuncaoVariosLong',
+            comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.SerializeToString,
+            comunicacao__grpc_dot_mensagens__pb2.MensagemVariosLong.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def FuncaoString(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Mensagem/FuncaoString',
+            comunicacao__grpc_dot_mensagens__pb2.MensagemString.SerializeToString,
+            comunicacao__grpc_dot_mensagens__pb2.MensagemString.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def FuncaoComplexa(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Mensagem/FuncaoComplexa',
+            comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.SerializeToString,
+            comunicacao__grpc_dot_mensagens__pb2.MensagemComplexa.FromString,
             options,
             channel_credentials,
             insecure,
