@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+service Mensagem {
+    rpc RecebePessoa(Pessoa) returns (Pessoa) {}
+}
+
+
+message Pessoa {
+    string nome = 1;
+}
