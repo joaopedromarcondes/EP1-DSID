@@ -3,15 +3,12 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 
 service Mensagem {
-    rpc RecebePessoa(MensagemPessoa) returns (MensagemPessoa) {}
     rpc FuncaoVoid (google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc FuncaoLong(MensagemLong) returns (MensagemLong) {}
-    //rpc FuncaoString() returns (google.protobuf.StringValue) {}
+    rpc FuncaoVariosLong(MensagemVariosLong) returns (MensagemVariosLong) {}
+    rpc FuncaoString(MensagemString) returns (MensagemString) {}
+    rpc FuncaoComplexa(MensagemComplexa) returns (MensagemComplexa) {}
     
-}
-
-message MensagemPessoa {
-    string nome = 1;
 }
 
 message MensagemVoid{
@@ -20,4 +17,23 @@ message MensagemVoid{
 
 message MensagemLong{
     int64 valor = 1;
+}
+
+message MensagemVariosLong{
+    repeated int64 valores = 1;
+}
+
+message MensagemString{
+    string valor = 1;
+}
+
+message MensagemComplexa{
+    int id = 1;
+    string nome = 2;
+    bool ativo = 3;
+    double salario = 4;
+    string estadoCivil = 5;
+    repeated string filhos = 6;
+    string cargo = 7;
+    int idade = 8;
 }
