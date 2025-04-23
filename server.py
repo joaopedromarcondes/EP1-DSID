@@ -9,15 +9,16 @@ class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
         print(request)
         return mensagens_pb2.MensagemPessoa(nome="andré")
     
-    def RecebeVoid(self, request, context):
+    def FuncaoVoid(self, request, context):
         print("Recebendo Void")
 
-    def RecebeLong(self, request, context):
+    def FuncaoLong(self, request, context):
         print(request)
-        var = randint(1, 1000)
+        var = randint(1, 10)
+        valor = request.valor
         valor *= var
         print(valor)
-        return mensagens_pb2.MensagemLong(valor)
+        return mensagens_pb2.MensagemLong(valor=valor)
    
 
 def serve():

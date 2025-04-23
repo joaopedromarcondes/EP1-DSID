@@ -6,9 +6,9 @@ def client():
     channel = grpc.insecure_channel('localhost:50051')
     stub = mensagens_pb2_grpc.MensagemStub(channel)
     nome = "Andre"
-    pessoa = mensagens_pb2.Pessoa(nome=nome)
-    feature = stub.RecebePessoa(pessoa)
-    print(feature)
+
+    print(stub.FuncaoLong(mensagens_pb2.MensagemLong(valor=10)))
+
 
 
 if __name__ == "__main__":

@@ -24,15 +24,19 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n comunicacao_grpc/mensagens.proto\"\x16\n\x06Pessoa\x12\x0c\n\x04nome\x18\x01 \x01(\t2.\n\x08Mensagem\x12\"\n\x0cRecebePessoa\x12\x07.Pessoa\x1a\x07.Pessoa\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n comunicacao_grpc/mensagens.proto\"\x1e\n\x0eMensagemPessoa\x12\x0c\n\x04nome\x18\x01 \x01(\t\"\x0e\n\x0cMensagemVoid\"\x1d\n\x0cMensagemLong\x12\r\n\x05valor\x18\x01 \x01(\x03\x32\x9a\x01\n\x08Mensagem\x12\x32\n\x0cRecebePessoa\x12\x0f.MensagemPessoa\x1a\x0f.MensagemPessoa\"\x00\x12,\n\nFuncaoVoid\x12\r.MensagemVoid\x1a\r.MensagemVoid\"\x00\x12,\n\nFuncaoLong\x12\r.MensagemLong\x1a\r.MensagemLong\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'comunicacao_grpc.mensagens_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_PESSOA']._serialized_start=36
-  _globals['_PESSOA']._serialized_end=58
-  _globals['_MENSAGEM']._serialized_start=60
-  _globals['_MENSAGEM']._serialized_end=106
+  _globals['_MENSAGEMPESSOA']._serialized_start=36
+  _globals['_MENSAGEMPESSOA']._serialized_end=66
+  _globals['_MENSAGEMVOID']._serialized_start=68
+  _globals['_MENSAGEMVOID']._serialized_end=82
+  _globals['_MENSAGEMLONG']._serialized_start=84
+  _globals['_MENSAGEMLONG']._serialized_end=113
+  _globals['_MENSAGEM']._serialized_start=116
+  _globals['_MENSAGEM']._serialized_end=270
 # @@protoc_insertion_point(module_scope)
