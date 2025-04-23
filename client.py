@@ -35,11 +35,12 @@ def client():
 
     tempos_Long = []
     for i in range(10):
-        val = randint(1, 10)
+        val = randint(0, 2**63)
         inicio = time.perf_counter()
         stub.FuncaoLong(mensagens_pb2.MensagemLong(valor=val))
         fim = time.perf_counter()
         tempos_Long.append(fim - inicio)
+        print(inicio)
     print_desempenho(tempos_Long, "Função Long")
     
 

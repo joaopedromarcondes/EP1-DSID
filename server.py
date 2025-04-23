@@ -16,7 +16,7 @@ class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
     
     def FuncaoLong(self, request, context):
         print(request)
-        var = randint(1, 10)
+        var = 1
         valor = request.valor
         valor *= var
         print(valor)
