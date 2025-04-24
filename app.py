@@ -17,6 +17,7 @@ def app():
     tempos_grpc = grpc_client.client()
     tempos_grpc = pd.DataFrame(tempos_grpc)
     print(tempos_grpc)
+    print(tempos_grpc.describe())
 
     grpc_serv.terminate()
 
