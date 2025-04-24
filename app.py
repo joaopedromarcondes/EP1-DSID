@@ -31,6 +31,24 @@ def gerar_graficos(tempos_grpc, titulo):
     plt.show()
 
 
+def gerar_grafico_comparativo(tempos_grpc, tempos_json):
+    # Combinar os tempos em um único DataFrame
+    comparativo = pd.DataFrame({
+        "gRPC": tempos_grpc.mean(),
+        "JSON-RPC": tempos_json.mean()
+    })
+
+    # Criar o gráfico de barras
+    comparativo.plot(kind='bar', yerr=[tempos_grpc.std(), tempos_json.std()], capsize=4, color=['skyblue', 'lightgreen'], alpha=0.8)
+    plt.title("Comparação de Tempos - gRPC vs JSON-RPC")
+    plt.ylabel("Tempo Médio (ms)")
+    plt.xlabel("Operações")
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig("comparacao_tempos.png")
+    plt.show()
+
+
 def app():
     grpc_serv = Process(target=grpc_server.serve)
     grpc_serv.start()
@@ -56,6 +74,8 @@ def app():
     print(tempos_json.describe())
 
     gerar_graficos(tempos_json, "JSON-RPC")
+
+    gerar_grafico_comparativo(tempos_grpc, tempos_json)
 
     json_server_process.terminate()
 
