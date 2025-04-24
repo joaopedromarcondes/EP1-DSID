@@ -38,7 +38,7 @@ def FuncaoComplexa(id, nome, ativo, salario, estadoCivil, filhos, cargo, idade):
 
 def serve():
     print("Iniciando servidor JSON-RPC...")
-    jsonrpcserver.serve("localhost", 5000)
+    jsonrpcserver.serve("localhost", 5001)
 
 if __name__ == "__main__":
     serve()

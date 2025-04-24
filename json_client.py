@@ -3,7 +3,7 @@ import requests
 import json
 
 def call_json_rpc(method, params, id):
-    url = "http://localhost:5000"
+    url = "http://localhost:5001"
     headers = {"Content-Type": "application/json"}
     payload = {
         "jsonrpc": "2.0",

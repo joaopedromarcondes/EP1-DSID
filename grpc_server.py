@@ -21,7 +21,7 @@ class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
     def FuncaoVariosLong(self, request, context):
         print("Recebendo Varios Long")
         return mensagens_pb2.MensagemVariosLong(
-            valores=[randint(0, 2**63),]
+            valores=[randint(0, 2**62),]
         )
     
     def FuncaoString(self, request, context):
