@@ -3,3 +3,6 @@ build:
 
 clean:
 	rm comunicacao_grpc/mensagens_pb2.py comunicacao_grpc/mensagens_pb2_grpc.py
+
+update:
+	pip install -r requirements.txt
