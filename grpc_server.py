@@ -5,10 +5,6 @@ from random import randint
 from google.protobuf.empty_pb2 import Empty 
 
 class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
-
-    def RecebePessoa(self, request, context):
-        print(request)
-        return mensagens_pb2.MensagemPessoa(nome="andré")
     
     def FuncaoVoid(self, request, context):
         print("Recebendo Void")
@@ -21,6 +17,33 @@ class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
         valor *= var
         print(valor)
         return mensagens_pb2.MensagemLong(valor=valor)
+    
+    def FuncaoVariosLong(self, request, context):
+        print("Recebendo Varios Long")
+        return mensagens_pb2.MensagemVariosLong(
+            valores=[randint(0, 2**63),]
+        )
+    
+    def FuncaoString(self, request, context):
+        print("Recebendo String")
+        return mensagens_pb2.MensagemString(
+            valor="Mensagem String"
+        )
+    
+    def FuncaoComplexa(self, request, context):
+        print("Recebendo Mensagem Complexa")
+        return mensagens_pb2.MensagemComplexa(
+            id=3,
+            nome="Mensagem Complexa",
+            ativo=True,
+            salario=1000.0,
+            estadoCivil="Casado",
+            filhos=["Filho 1", "Filho 2"],
+            cargo="Desenvolvedor",
+            idade=30
+        )
+    
+
    
 
 def serve():
