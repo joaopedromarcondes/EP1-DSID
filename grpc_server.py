@@ -7,40 +7,31 @@ from google.protobuf.empty_pb2 import Empty
 class MensagemServicer(mensagens_pb2_grpc.MensagemServicer):
     
     def FuncaoVoid(self, request, context):
-        print("Recebendo Void")
         return Empty()  
     
     def FuncaoLong(self, request, context):
-        print(request)
-        var = 1
-        valor = request.valor
-        valor *= var
-        print(valor)
-        return mensagens_pb2.MensagemLong(valor=valor)
+        return mensagens_pb2.MensagemLong(valor=request.valor*2)
     
     def FuncaoVariosLong(self, request, context):
-        print("Recebendo Varios Long")
         return mensagens_pb2.MensagemVariosLong(
-            valores=[randint(0, 2**62),]
+            valores=[sum(request.valores),]
         )
     
     def FuncaoString(self, request, context):
-        print("Recebendo String")
         return mensagens_pb2.MensagemString(
-            valor="Mensagem String"
+            valor=request.valor.upper()
         )
     
     def FuncaoComplexa(self, request, context):
-        print("Recebendo Mensagem Complexa")
         return mensagens_pb2.MensagemComplexa(
-            id=3,
-            nome="Mensagem Complexa",
-            ativo=True,
-            salario=1000.0,
-            estadoCivil="Casado",
-            filhos=["Filho 1", "Filho 2"],
-            cargo="Desenvolvedor",
-            idade=30
+            id=request.id,
+            nome=request.nome.upper(),
+            ativo=not request.ativo,
+            salario=request.salario * 1.2,
+            estadoCivil=request.estadoCivil,
+            filhos=request.filhos,
+            cargo=request.cargo,
+            idade=request.idade + 1
         )
     
 
