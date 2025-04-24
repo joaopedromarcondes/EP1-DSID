@@ -30,6 +30,7 @@ def print_desempenho(tempos, nome):
 
 def client():
     print("Começando Cliente....\n")
+    res = dict()
     channel = grpc.insecure_channel('localhost:50051')
     stub = mensagens_pb2_grpc.MensagemStub(channel)
 
@@ -42,6 +43,7 @@ def client():
         tempos_Long.append(fim - inicio)
         print(inicio)
     print_desempenho(tempos_Long, "Função Long")
+    res["Long"] = tempos_Long
     
 
     tempos_Void = []
@@ -52,6 +54,9 @@ def client():
         fim = time.perf_counter()
         tempos_Void.append(fim - inicio)
     print_desempenho(tempos_Void, "Função Void")
+    res["Void"] = tempos_Void
+
+    return res
 
 
 

@@ -4,6 +4,7 @@ import grpc_server
 import json_client
 import json_server
 from time import sleep
+import pandas as pd
 
 
 
@@ -13,7 +14,9 @@ def app():
     grpc_serv.start()
     
     sleep(2)
-    grpc_client.client()
+    tempos_grpc = grpc_client.client()
+    tempos_grpc = pd.DataFrame(tempos_grpc)
+    print(tempos_grpc)
 
     grpc_serv.terminate()
 
