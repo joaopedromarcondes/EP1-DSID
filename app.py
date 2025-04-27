@@ -7,6 +7,7 @@ from time import sleep
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import socket
 
 
 def gerar_graficos(tempos_grpc, titulo):
@@ -48,36 +49,111 @@ def gerar_grafico_comparativo(tempos_grpc, tempos_json):
     plt.savefig("comparacao_tempos.png")
     plt.show()
 
+import socket
+
+def get_ip_local():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # Não precisa estar online — só cria a conexão para descobrir o IP usado
+        s.connect(("8.8.8.8", 80))
+        ip_local = s.getsockname()[0]
+    except Exception:
+        ip_local = "127.0.0.1"
+    finally:
+        s.close()
+    return ip_local
+
+
+
 
 def app():
-    grpc_serv = Process(target=grpc_server.serve)
-    grpc_serv.start()
+    print("---------------------------------\n")
+    print("Bem-vindo ao EP1 de Sistemas Distribuídos")
+    print("Grupo: João Pedro e Cleben Junior\n")
+    print("############################\n")
+    print("Escolha a sua opção:")
+    print("1 - executar servidor\n2 - executar clientes\n3 - executar ambos localmente\n4 - Sair\n")
+    print("---------------------------------\n")
+    entrada = input("Digite a opção desejada: ")
+    while entrada not in ["1", "2", "3", "4"]:
+        print("Opção inválida. Tente novamente.")
+        entrada = input("Digite a opção desejada: ")
+    print("---------------------------------\n")
+
+
+
+    if entrada == "1":
+        print("Iniciando servidores gRPC e JSON-RPC")
+        print("Seu ip local é: ", get_ip_local())
+        
+        grpc_serv = Process(target=grpc_server.serve)
+        grpc_serv.start()
+        json_server_process = Process(target=json_server.serve)
+        json_server_process.start()
+        print("Servidores iniciados. Pressione Ctrl+C para parar.")
+        try:
+            while True:
+                sleep(1)
+        except KeyboardInterrupt:
+            grpc_serv.terminate()
+            json_server_process.terminate()
+            print("Servidores parados.")
+            return
+    elif entrada == "2":
+        ip_dest = input("Digite o IP dos servidores (apenas um IP): ")
+        print("Iniciando clientes gRPC e JSON-RPC\n")
+
+
+        tempos_grpc = grpc_client.client()
+        tempos_grpc = pd.DataFrame(tempos_grpc)
+
+        tempos_json = json_client.main()
+        tempos_json = pd.DataFrame(tempos_json)
+        print(tempos_grpc)
+        print(tempos_grpc.describe())
+        print(tempos_json)  
+        print(tempos_json.describe())
+        gerar_graficos(tempos_grpc, "gRPC")
+        gerar_graficos(tempos_json, "JSON-RPC")
+        gerar_grafico_comparativo(tempos_grpc, tempos_json)
+        print("Finalizado os clientes\n")
+
+    elif entrada == "3":
+        print("Executando ambos localmente\n")
+        grpc_serv = Process(target=grpc_server.serve)
+        grpc_serv.start()
+        
+        sleep(2)
+        tempos_grpc = grpc_client.client()
+        tempos_grpc = pd.DataFrame(tempos_grpc)
+        print(tempos_grpc)
+        print(tempos_grpc.describe())
+
+        gerar_graficos(tempos_grpc, "gRPC")
+
+        grpc_serv.terminate()
+
+        print("Finalizado o servidor gRPC\n")
+
+        json_server_process = Process(target=json_server.serve)
+        json_server_process.start()
+        sleep(2)
+        tempos_json = json_client.main()
+        tempos_json = pd.DataFrame(tempos_json)
+        print(tempos_json)
+        print(tempos_json.describe())
+
+        gerar_graficos(tempos_json, "JSON-RPC")
+
+        gerar_grafico_comparativo(tempos_grpc, tempos_json)
+
+        json_server_process.terminate()
+        print("Finalizado a execução local\n")
+
+    elif entrada == "4":
+        print("Saindo do programa...")
+        return
     
-    sleep(2)
-    tempos_grpc = grpc_client.client()
-    tempos_grpc = pd.DataFrame(tempos_grpc)
-    print(tempos_grpc)
-    print(tempos_grpc.describe())
-
-    gerar_graficos(tempos_grpc, "gRPC")
-
-    grpc_serv.terminate()
-
-    print("Finalizado o servidor gRPC\n")
-
-    json_server_process = Process(target=json_server.serve)
-    json_server_process.start()
-    sleep(2)
-    tempos_json = json_client.main()
-    tempos_json = pd.DataFrame(tempos_json)
-    print(tempos_json)
-    print(tempos_json.describe())
-
-    gerar_graficos(tempos_json, "JSON-RPC")
-
-    gerar_grafico_comparativo(tempos_grpc, tempos_json)
-
-    json_server_process.terminate()
 
 
 if __name__ == "__main__":

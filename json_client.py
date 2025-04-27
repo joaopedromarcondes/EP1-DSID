@@ -4,8 +4,8 @@ import json
 import time
 
 # retorna o tempo executado
-def call_json_rpc(method, params, id):
-    url = "http://localhost:5001"
+def call_json_rpc(method, params, id, ip_dest="localhost"):
+    url = f"http://{ip_dest}:5001"
     headers = {"Content-Type": "application/json"}
     payload = {
         "jsonrpc": "2.0",
@@ -19,7 +19,7 @@ def call_json_rpc(method, params, id):
     fim = time.perf_counter()
     return fim - inicio
 
-def main():
+def main(ip_dest="localhost"):
     res = dict()
     
     tempo_Void = []

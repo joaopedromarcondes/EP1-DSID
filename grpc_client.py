@@ -5,10 +5,10 @@ import time
 from random import randint
 
 
-def client():
+def client(ip_dest="localhost"):
     print("Começando Cliente....\n")
     res = dict()
-    channel = grpc.insecure_channel('localhost:50051')
+    channel = grpc.insecure_channel(f'{ip_dest}:50051')
     stub = mensagens_pb2_grpc.MensagemStub(channel)
 
     tempos_Long = []
