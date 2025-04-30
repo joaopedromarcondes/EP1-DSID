@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import socket
 
-
 def gerar_graficos(tempos_grpc, titulo):
     plt.figure(figsize=(10, 6))
     tempos_grpc.mean().plot(kind='bar', yerr=tempos_grpc.std(), capsize=4, color='skyblue', alpha=0.8)
@@ -33,13 +32,11 @@ def gerar_graficos(tempos_grpc, titulo):
 
 
 def gerar_grafico_comparativo(tempos_grpc, tempos_json):
-    # Combinar os tempos em um único DataFrame
     comparativo = pd.DataFrame({
         "gRPC": tempos_grpc.mean(),
         "JSON-RPC": tempos_json.mean()
     })
 
-    # Criar o gráfico de barras
     comparativo.plot(kind='bar', yerr=[tempos_grpc.std(), tempos_json.std()], capsize=4, color=['skyblue', 'lightgreen'], alpha=0.8)
     plt.title("Comparação de Tempos - gRPC vs JSON-RPC")
     plt.ylabel("Tempo Médio (ms)")
@@ -49,12 +46,28 @@ def gerar_grafico_comparativo(tempos_grpc, tempos_json):
     plt.savefig("comparacao_tempos.png")
     plt.show()
 
-import socket
+
+
+
+def salvar_analise(tempos_grpc, tempos_json):
+    with open("analise.md", "w") as f:
+        f.write("Tempos - gRPC\n")
+        f.write(tempos_grpc.to_string())
+        f.write("\n\n")
+        f.write("Análise de Tempos - gRPC\n")
+        f.write(tempos_grpc.describe().to_string())
+        f.write("\n\n\n")
+        f.write("Tempos - JSON-RPC\n")
+        f.write(tempos_json.to_string())
+        f.write("\n\n")
+        f.write("Análise de Tempos - JSON-RPC\n")
+        f.write(tempos_json.describe().to_string())
+        f.write("\n")
+
 
 def get_ip_local():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        # Não precisa estar online — só cria a conexão para descobrir o IP usado
         s.connect(("8.8.8.8", 80))
         ip_local = s.getsockname()[0]
     except Exception:
@@ -62,8 +75,6 @@ def get_ip_local():
     finally:
         s.close()
     return ip_local
-
-
 
 
 def app():
@@ -79,8 +90,6 @@ def app():
         print("Opção inválida. Tente novamente.")
         entrada = input("Digite a opção desejada: ")
     print("---------------------------------\n")
-
-
 
     if entrada == "1":
         print("Iniciando servidores gRPC e JSON-RPC")
@@ -103,20 +112,18 @@ def app():
         ip_dest = input("Digite o IP dos servidores (apenas um IP): ")
         print("Iniciando clientes gRPC e JSON-RPC\n")
 
-
         tempos_grpc = grpc_client.client()
         tempos_grpc = pd.DataFrame(tempos_grpc)
 
         tempos_json = json_client.main()
         tempos_json = pd.DataFrame(tempos_json)
-        print(tempos_grpc)
-        print(tempos_grpc.describe())
-        print(tempos_json)  
-        print(tempos_json.describe())
+
+        salvar_analise(tempos_grpc, tempos_json)
+
         gerar_graficos(tempos_grpc, "gRPC")
         gerar_graficos(tempos_json, "JSON-RPC")
         gerar_grafico_comparativo(tempos_grpc, tempos_json)
-        print("Finalizado os clientes\n")
+        print("Análise salva no arquivo 'analise.txt'. Finalizado os clientes.\n")
 
     elif entrada == "3":
         print("Executando ambos localmente\n")
@@ -126,13 +133,8 @@ def app():
         sleep(2)
         tempos_grpc = grpc_client.client()
         tempos_grpc = pd.DataFrame(tempos_grpc)
-        print(tempos_grpc)
-        print(tempos_grpc.describe())
-
-        gerar_graficos(tempos_grpc, "gRPC")
 
         grpc_serv.terminate()
-
         print("Finalizado o servidor gRPC\n")
 
         json_server_process = Process(target=json_server.serve)
@@ -140,21 +142,20 @@ def app():
         sleep(2)
         tempos_json = json_client.main()
         tempos_json = pd.DataFrame(tempos_json)
-        print(tempos_json)
-        print(tempos_json.describe())
-
-        gerar_graficos(tempos_json, "JSON-RPC")
-
-        gerar_grafico_comparativo(tempos_grpc, tempos_json)
 
         json_server_process.terminate()
         print("Finalizado a execução local\n")
 
+        salvar_analise(tempos_grpc, tempos_json)
+
+        gerar_graficos(tempos_grpc, "gRPC")
+        gerar_graficos(tempos_json, "JSON-RPC")
+        gerar_grafico_comparativo(tempos_grpc, tempos_json)
+        print("Análise salva no arquivo 'analise.md'.\n")
+
     elif entrada == "4":
         print("Saindo do programa...")
         return
-    
-
 
 if __name__ == "__main__":
     app()
