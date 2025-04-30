@@ -1,8 +1,8 @@
 /comunicacao_grpc/__pycache__/*
 __pycache__/*
-gRPC_barras.png
-gRPC_linhas.png
-JSON-RPC_barras.png
-JSON-RPC_linhas.png
-comparacao_tempos.png
-analise.md
+./gRPC_barras.png
+./gRPC_linhas.png
+./JSON-RPC_barras.png
+./JSON-RPC_linhas.png
+./comparacao_tempos.png
+./analise.md
