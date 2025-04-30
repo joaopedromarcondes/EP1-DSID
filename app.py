@@ -112,10 +112,10 @@ def app():
         ip_dest = input("Digite o IP dos servidores (apenas um IP): ")
         print("Iniciando clientes gRPC e JSON-RPC\n")
 
-        tempos_grpc = grpc_client.client()
+        tempos_grpc = grpc_client.client(ip_dest=ip_dest)
         tempos_grpc = pd.DataFrame(tempos_grpc)
 
-        tempos_json = json_client.main()
+        tempos_json = json_client.main(ip_dest=ip_dest)
         tempos_json = pd.DataFrame(tempos_json)
 
         salvar_analise(tempos_grpc, tempos_json)
