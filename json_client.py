@@ -24,24 +24,24 @@ def main(ip_dest="localhost"):
     
     tempo_Void = []
     for _ in range(10):
-        tempo_Void.append(call_json_rpc("FuncaoVoid", {}, 1))
+        tempo_Void.append(call_json_rpc("FuncaoVoid", {}, 1, ip_dest))
     res["Void"] = tempo_Void
 
     tempo_Long = []
     for _ in range(10):
-        tempo_Long.append(call_json_rpc("FuncaoLong", {"valor": 10}, 2))
+        tempo_Long.append(call_json_rpc("FuncaoLong", {"valor": 10}, 2, ip_dest))
     res["Long"] = tempo_Long
 
     tempo_VariosLong = []
     for _ in range(10):
-        tempo_VariosLong.append(call_json_rpc("FuncaoVariosLong", {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8}, 3))
+        tempo_VariosLong.append(call_json_rpc("FuncaoVariosLong", {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8}, 3, ip_dest))
     res["VariosLong"] = tempo_VariosLong
 
     tempo_String = []
     for i in range(0, 10): 
         tamanho = 2 ** i
         string_teste = "a" * tamanho 
-        tempo_String.append(call_json_rpc("FuncaoString", {"valor": string_teste}, 4))
+        tempo_String.append(call_json_rpc("FuncaoString", {"valor": string_teste}, 4, ip_dest))
     res["String"] = tempo_String
 
     tempo_Complexa = []
@@ -57,7 +57,7 @@ def main(ip_dest="localhost"):
             "filhos": ["Ana", "Pedro"],
             "cargo": "Engenheiro",
             "idade": 30
-        }, 5))
+        }, 5, ip_dest))
     res["Complexa"] = tempo_Complexa
     
 
