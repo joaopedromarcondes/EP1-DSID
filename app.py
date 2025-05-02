@@ -21,7 +21,7 @@ def gerar_graficos(tempos_grpc, titulo):
     plt.show()
 
     plt.figure(figsize=(10, 6))
-    sns.lineplot(data=tempos_grpc, ci='sd', marker='o', dashes=False)
+    sns.lineplot(data=tempos_grpc, errorbar='sd', marker='o', dashes=False)
     plt.title(f"{titulo} - Gráfico de Linhas com Desvio Padrão")
     plt.ylabel("Tempo (ms)")
     plt.xlabel("Operações")
@@ -123,7 +123,7 @@ def app():
         gerar_graficos(tempos_grpc, "gRPC")
         gerar_graficos(tempos_json, "JSON-RPC")
         gerar_grafico_comparativo(tempos_grpc, tempos_json)
-        print("Análise salva no arquivo 'analise.txt'. Finalizado os clientes.\n")
+        print("Análise salva no arquivo 'analise.md'. Finalizado os clientes.\n")
 
     elif entrada == "3":
         print("Executando ambos localmente\n")
