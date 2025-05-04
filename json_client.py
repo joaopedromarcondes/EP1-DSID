@@ -1,9 +1,7 @@
-# json-client.py
 import requests
 import json
 import time
 
-# retorna o tempo executado
 def call_json_rpc(method, params, id, ip_dest="localhost"):
     url = f"http://{ip_dest}:5001"
     headers = {"Content-Type": "application/json"}
